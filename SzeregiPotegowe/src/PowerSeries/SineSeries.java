@@ -36,6 +36,3 @@ class SineSeries extends MacLaurinSeries {
         return Utils.intPow(-1, n) * Utils.intPow(this.argument, 1 + 2 * n) / Utils.factorial(1 + 2 * n);
     }
 }
-
-for i=0;i<1e16;i++
--3.14159265359+i*-0.00000314159
