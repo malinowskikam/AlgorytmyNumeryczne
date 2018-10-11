@@ -1,14 +1,13 @@
-package PowerSeriesTests;
+package PowerSeries;
 
 abstract class MacLaurinSeries {
 
     int nOfIterations;
     double argument;
 
-    MacLaurinSeries(int n, double x)
-    {
-        this.nOfIterations=n;
-        this.argument=x;
+    MacLaurinSeries(int n, double x) {
+        this.nOfIterations = n;
+        this.argument = x;
     }
 
     private double[] getFirstNElements() {
