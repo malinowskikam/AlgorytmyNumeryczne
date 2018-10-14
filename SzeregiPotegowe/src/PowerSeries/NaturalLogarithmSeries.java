@@ -1,6 +1,6 @@
 package PowerSeries;
 
-class NaturalLogarithmSeries extends MacLaurinSeries {
+ class NaturalLogarithmSeries extends MacLaurinSeries {
 
     //MacLaurin series of ln(x+1)
     //

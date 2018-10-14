@@ -2,6 +2,8 @@ import PowerSeriesTest.DataGathering;
 
 public class Main {
     public static void main(String[] args) {
+
+
         double argument = -0.99;
         double delta = 0.0000019;
         int count = 1000000;
