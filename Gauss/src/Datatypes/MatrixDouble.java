@@ -8,9 +8,11 @@ public class MatrixDouble implements MatrixDataType<MatrixDouble,Double> {
         setValue(((double)v)/0x10000); //0x10000 = 2^16
     }
 
+    public MatrixDouble(double v) { this.value=v; }
+
     @Override
     public double evaluate() {
-        return value;
+        return this.value;
     }
 
     @Override
@@ -24,22 +26,25 @@ public class MatrixDouble implements MatrixDataType<MatrixDouble,Double> {
     }
 
     @Override
-    public void add(MatrixDouble number) {
-        this.value += number.getValue();
+    public String toString() { return ""+value;}
+
+    @Override
+    public MatrixDouble add(MatrixDouble number) {
+        return new MatrixDouble(this.getValue() + number.getValue());
     }
 
     @Override
-    public void subtract(MatrixDouble number) {
-        this.value -= number.getValue();
+    public MatrixDouble subtract(MatrixDouble number) {
+        return new MatrixDouble(this.getValue() - number.getValue());
     }
 
     @Override
-    public void multiply(MatrixDouble number) {
-        this.value *= number.getValue();
+    public MatrixDouble multiply(MatrixDouble number) {
+        return new MatrixDouble(this.getValue() * number.getValue());
     }
 
     @Override
-    public void divide(MatrixDouble number) {
-        this.value /= number.getValue();
+    public MatrixDouble divide(MatrixDouble number) {
+        return new MatrixDouble(this.getValue() / number.getValue());
     }
 }

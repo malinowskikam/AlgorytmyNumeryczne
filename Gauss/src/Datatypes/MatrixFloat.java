@@ -8,14 +8,16 @@ public class MatrixFloat implements MatrixDataType<MatrixFloat,Float> {
         setValue(((float)v)/0x10000); //0x10000 = 2^16
     }
 
+    public MatrixFloat(float v) { setValue(v);}
+
     @Override
     public double evaluate() {
-        return value;
+        return (double)value;
     }
 
     @Override
     public Float getValue() {
-        return (float) this.value;
+        return this.value;
     }
 
     @Override
@@ -24,22 +26,26 @@ public class MatrixFloat implements MatrixDataType<MatrixFloat,Float> {
     }
 
     @Override
-    public void add(MatrixFloat number) {
-        this.value += number.getValue();
+    public String toString() { return ""+value;}
+
+    @Override
+    public MatrixFloat add(MatrixFloat number) {
+        return new MatrixFloat(this.getValue() + number.getValue());
     }
 
     @Override
-    public void subtract(MatrixFloat number) {
-        this.value -= number.getValue();
+    public MatrixFloat subtract(MatrixFloat number) {
+        return new MatrixFloat(this.getValue() - number.getValue());
+
     }
 
     @Override
-    public void multiply(MatrixFloat number) {
-        this.value *= number.getValue();
+    public MatrixFloat multiply(MatrixFloat number) {
+        return new MatrixFloat(this.getValue() * number.getValue());
     }
 
     @Override
-    public void divide(MatrixFloat number) {
-        this.value /= number.getValue();
+    public MatrixFloat divide(MatrixFloat number) {
+        return new MatrixFloat(this.getValue() / number.getValue());
     }
 }
