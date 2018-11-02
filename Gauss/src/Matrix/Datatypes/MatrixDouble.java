@@ -1,6 +1,6 @@
-package Datatypes;
+package Matrix.Datatypes;
 
-public class MatrixDouble implements MatrixDataType<MatrixDouble,Double> {
+public class MatrixDouble extends MatrixDataType<Double> {
 
     private double value;
 
@@ -8,7 +8,10 @@ public class MatrixDouble implements MatrixDataType<MatrixDouble,Double> {
         setValue(((double)v)/0x10000); //0x10000 = 2^16
     }
 
-    public MatrixDouble(double v) { this.value=v; }
+    public MatrixDouble(double v) {
+        this.value=v;
+        this.inferedClass=Double.class;
+    }
 
     @Override
     public double evaluate() {
@@ -29,22 +32,22 @@ public class MatrixDouble implements MatrixDataType<MatrixDouble,Double> {
     public String toString() { return ""+value;}
 
     @Override
-    public MatrixDouble add(MatrixDouble number) {
+    public MatrixDataType<Double> add(MatrixDataType<Double> number) {
         return new MatrixDouble(this.getValue() + number.getValue());
     }
 
     @Override
-    public MatrixDouble subtract(MatrixDouble number) {
+    public MatrixDataType<Double> subtract(MatrixDataType<Double> number) {
         return new MatrixDouble(this.getValue() - number.getValue());
     }
 
     @Override
-    public MatrixDouble multiply(MatrixDouble number) {
+    public MatrixDataType<Double> multiply(MatrixDataType<Double> number) {
         return new MatrixDouble(this.getValue() * number.getValue());
     }
 
     @Override
-    public MatrixDouble divide(MatrixDouble number) {
+    public MatrixDataType<Double> divide(MatrixDataType<Double> number) {
         return new MatrixDouble(this.getValue() / number.getValue());
     }
 }

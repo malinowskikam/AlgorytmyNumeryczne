@@ -1,18 +1,21 @@
-package Datatypes;
+package Matrix.Datatypes;
 
-public class MatrixFloat implements MatrixDataType<MatrixFloat,Float> {
+public class MatrixFloat extends MatrixDataType<Float> {
 
     private float value;
 
-    public MatrixFloat(int v){
+    public MatrixFloat(int v) {
         setValue(((float)v)/0x10000); //0x10000 = 2^16
     }
 
-    public MatrixFloat(float v) { setValue(v);}
+    public MatrixFloat(float v) {
+        this.setValue(v);
+        this.inferedClass = Float.class;
+    }
 
     @Override
     public double evaluate() {
-        return (double)value;
+        return this.value;
     }
 
     @Override
@@ -29,23 +32,22 @@ public class MatrixFloat implements MatrixDataType<MatrixFloat,Float> {
     public String toString() { return ""+value;}
 
     @Override
-    public MatrixFloat add(MatrixFloat number) {
+    public MatrixDataType<Float> add(MatrixDataType<Float> number) {
         return new MatrixFloat(this.getValue() + number.getValue());
     }
 
     @Override
-    public MatrixFloat subtract(MatrixFloat number) {
+    public MatrixDataType<Float> subtract(MatrixDataType<Float> number) {
         return new MatrixFloat(this.getValue() - number.getValue());
-
     }
 
     @Override
-    public MatrixFloat multiply(MatrixFloat number) {
+    public MatrixDataType<Float> multiply(MatrixDataType<Float> number) {
         return new MatrixFloat(this.getValue() * number.getValue());
     }
 
     @Override
-    public MatrixFloat divide(MatrixFloat number) {
+    public MatrixDataType<Float> divide(MatrixDataType<Float> number) {
         return new MatrixFloat(this.getValue() / number.getValue());
     }
 }
