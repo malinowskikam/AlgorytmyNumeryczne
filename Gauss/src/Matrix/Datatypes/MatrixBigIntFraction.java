@@ -18,6 +18,12 @@ public class MatrixBigIntFraction extends MatrixDataType<BigIntFraction> {
 
     public MatrixBigIntFraction(BigIntFraction f) {
         this.setValue(f);
+        this.inferedClass = BigIntFraction.class;
+    }
+
+    public MatrixBigIntFraction(MatrixBigIntFraction prototype) {
+        this.setValue(new BigIntFraction(prototype.getValue()));
+        this.inferedClass = BigIntFraction.class;
     }
 
     @Override

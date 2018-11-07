@@ -5,12 +5,16 @@ public class MatrixDouble extends MatrixDataType<Double> {
     private double value;
 
     public MatrixDouble(int v) {
-        setValue(((double)v)/0x10000); //0x10000 = 2^16
+        setValue(((double) v) / 0x10000); //0x10000 = 2^16
     }
 
     public MatrixDouble(double v) {
-        this.value=v;
-        this.inferedClass=Double.class;
+        this.value = v;
+        this.inferedClass = Double.class;
+    }
+
+    public MatrixDouble(MatrixDouble prototype) {
+        this.setValue(prototype.getValue());
     }
 
     @Override
@@ -29,7 +33,9 @@ public class MatrixDouble extends MatrixDataType<Double> {
     }
 
     @Override
-    public String toString() { return ""+value;}
+    public String toString() {
+        return "" + value;
+    }
 
     @Override
     public MatrixDataType<Double> add(MatrixDataType<Double> number) {

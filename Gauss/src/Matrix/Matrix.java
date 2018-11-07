@@ -3,13 +3,13 @@ package Matrix;
 import Matrix.Datatypes.*;
 
 public class Matrix {
-    private int rowCount;
-    private int colCount;
+    public final int rowCount;
+    public final int colCount;
 
     private MatrixDataType[][] matrix;
-    private Class classOfContent;
+    private final Class classOfContent;
 
-    public Matrix(int n, int m, char type) {
+    public Matrix(int n, int m, char type, int min, int max) {
         try {
 
             if (!"fdb".contains(Character.toString(type))) throw new Exception("wrong output type");
@@ -20,7 +20,7 @@ public class Matrix {
             e.printStackTrace();
             System.exit(1);
         }
-        int[][] raw = MatrixGenerator.genetareRawTable(n, m, -0x10000, 0x10000 - 1);
+        int[][] raw = MatrixGenerator.generateRawTable(n, m,min,max);
 
         this.rowCount = raw.length;
         this.colCount = raw[0].length;
@@ -75,7 +75,7 @@ public class Matrix {
         StringBuilder s =  new StringBuilder();
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++)
-                s.append(matrix[i][j]);
+                s.append(matrix[i][j]).append(" ");
             s.append("\n");
         }
         return s.toString();

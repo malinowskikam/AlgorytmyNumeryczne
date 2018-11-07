@@ -3,7 +3,7 @@ package Matrix;
 import java.util.Random;
 
 class MatrixGenerator {
-     static int[][] genetareRawTable(int n, int m, int min, int max) {
+     static int[][] generateRawTable(int n, int m, int min, int max) {
         //dla zadania z algorytmu gaussa:
         //max = 0x10000 - 1;
         //min = -0x10000;
