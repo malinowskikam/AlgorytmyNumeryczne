@@ -4,26 +4,25 @@ import java.math.BigInteger;
 
 public class MatrixBigIntFraction extends MatrixDataType<BigIntFraction> {
 
-    BigIntFraction fraction;
+    private BigIntFraction fraction;
 
-    public MatrixBigIntFraction(int v){
-        setValue(new BigIntFraction(new BigInteger(""+v),new BigInteger(""+0x10000))); //0x10000 = 2^16
+    public MatrixBigIntFraction(int v) {
+        setValue(new BigIntFraction(new BigInteger("" + v), new BigInteger("" + 0x10000))); //0x10000 = 2^16
         this.inferedClass = BigIntFraction.class;
     }
 
-    public MatrixBigIntFraction(int n,int d){
-        setValue(new BigIntFraction(new BigInteger(""+n),new BigInteger(""+d)));
+    public MatrixBigIntFraction(int n, int d) {
+        setValue(new BigIntFraction(new BigInteger("" + n), new BigInteger("" + d)));
+        this.inferedClass = BigIntFraction.class;
     }
 
-    public MatrixBigIntFraction(BigIntFraction f) { this.setValue(f); }
-
-
-
-
+    public MatrixBigIntFraction(BigIntFraction f) {
+        this.setValue(f);
+    }
 
     @Override
     public double evaluate() {
-        return fraction.numerator.doubleValue()/fraction.denominator.doubleValue();
+        return fraction.numerator.doubleValue() / fraction.denominator.doubleValue();
     }
 
     @Override
@@ -37,7 +36,7 @@ public class MatrixBigIntFraction extends MatrixDataType<BigIntFraction> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return fraction.numerator.toString() + "/" + fraction.denominator.toString();
     }
 

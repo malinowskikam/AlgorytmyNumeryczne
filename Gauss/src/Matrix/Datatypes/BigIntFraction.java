@@ -2,27 +2,27 @@ package Matrix.Datatypes;
 
 import java.math.BigInteger;
 
-class BigIntFraction {
+public class BigIntFraction {
     BigInteger numerator; //licznik
     BigInteger denominator; //mianownik
 
     BigIntFraction(BigInteger n, BigInteger d) {
-        this.numerator = n;
-        this.denominator = d;
+        this.numerator = n.divide(nwd(n, d));
+        this.denominator = d.divide(nwd(n, d));
     }
 
-    private static BigInteger nwd(BigInteger a, BigInteger b){
+    private static BigInteger nwd(BigInteger a, BigInteger b) {
         BigInteger c;
-        while(b.doubleValue()>0){
-            c=a.mod(b);
-            a=b;
-            b=c;
+        while (b.doubleValue() > 0) {
+            c = a.mod(b);
+            a = b;
+            b = c;
         }
         return a;
     }
 
-    static BigInteger nww(BigInteger a, BigInteger b){
-        return a.multiply(b).divide(nwd(a,b));
+    private static BigInteger nww(BigInteger a, BigInteger b) {
+        return a.multiply(b).divide(nwd(a, b));
     }
 
     BigIntFraction add(BigIntFraction number) {
@@ -63,10 +63,9 @@ class BigIntFraction {
                 return new BigIntFraction(newNumerator.divide(nwd), nww.divide(nwd));
             else
                 return new BigIntFraction(newNumerator, nww);
-        }
-        else { // gdy równy mianownik
+        } else { // gdy równy mianownik
             newNumerator = this.numerator.subtract(number.numerator);
-            BigInteger nwd = nwd(newNumerator,this.denominator);
+            BigInteger nwd = nwd(newNumerator, this.denominator);
             if (!nwd.equals(BigInteger.ONE))
                 return new BigIntFraction(newNumerator.divide(nwd), this.denominator.divide(nwd));
             else
@@ -74,14 +73,14 @@ class BigIntFraction {
         }
     }
 
-    BigIntFraction multiply(BigIntFraction number){
-        BigInteger nwd = nwd(this.numerator,number.denominator);
-        if(!nwd.equals(BigInteger.ONE)) {
+    BigIntFraction multiply(BigIntFraction number) {
+        BigInteger nwd = nwd(this.numerator, number.denominator);
+        if (!nwd.equals(BigInteger.ONE)) {
             this.numerator = this.numerator.divide(nwd);
             number.denominator = number.denominator.divide(nwd);
         }
-        nwd = nwd(this.denominator,number.numerator);
-        if(!nwd.equals(BigInteger.ONE)) {
+        nwd = nwd(this.denominator, number.numerator);
+        if (!nwd.equals(BigInteger.ONE)) {
             this.denominator = this.denominator.divide(nwd);
             number.numerator = number.numerator.divide(nwd);
         }
@@ -90,22 +89,22 @@ class BigIntFraction {
         newNumerator = this.numerator.multiply(number.numerator);
         newDenominator = this.denominator.multiply(number.denominator);
 
-        nwd = nwd(newNumerator,newDenominator);
-        if(!nwd.equals(BigInteger.ONE))
-            return new BigIntFraction(newNumerator.divide(nwd),newDenominator.divide(nwd));
+        nwd = nwd(newNumerator, newDenominator);
+        if (!nwd.equals(BigInteger.ONE))
+            return new BigIntFraction(newNumerator.divide(nwd), newDenominator.divide(nwd));
         else
-            return new BigIntFraction(newNumerator,newDenominator);
+            return new BigIntFraction(newNumerator, newDenominator);
 
     }
 
-    BigIntFraction divide(BigIntFraction number){
-        BigInteger nwd = nwd(this.numerator,number.numerator);
-        if(!nwd.equals(BigInteger.ONE)) {
+    BigIntFraction divide(BigIntFraction number) {
+        BigInteger nwd = nwd(this.numerator, number.numerator);
+        if (!nwd.equals(BigInteger.ONE)) {
             this.numerator = this.numerator.divide(nwd);
             number.numerator = number.numerator.divide(nwd);
         }
-        nwd = nwd(this.denominator,number.denominator);
-        if(!nwd.equals(BigInteger.ONE)) {
+        nwd = nwd(this.denominator, number.denominator);
+        if (!nwd.equals(BigInteger.ONE)) {
             this.denominator = this.denominator.divide(nwd);
             number.denominator = number.denominator.divide(nwd);
         }
@@ -114,16 +113,15 @@ class BigIntFraction {
         newNumerator = this.numerator.multiply(number.denominator);
         newDenominator = this.denominator.multiply(number.numerator);
 
-        nwd = nwd(newNumerator,newDenominator);
-        if(!nwd.equals(BigInteger.ONE))
-            return new BigIntFraction(newNumerator.divide(nwd),newDenominator.divide(nwd));
+        nwd = nwd(newNumerator, newDenominator);
+        if (!nwd.equals(BigInteger.ONE))
+            return new BigIntFraction(newNumerator.divide(nwd), newDenominator.divide(nwd));
         else
-            return new BigIntFraction(newNumerator,newDenominator);
+            return new BigIntFraction(newNumerator, newDenominator);
 
     }
 
-    public String toString(){
+    public String toString() {
         return this.numerator.toString() + "/" + this.denominator.toString();
     }
-
 }
