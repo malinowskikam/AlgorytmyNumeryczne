@@ -4,26 +4,34 @@ import java.math.BigInteger;
 
 public class MatrixBigIntFraction extends MatrixDataType<BigIntFraction> {
 
+    private static final MatrixBigIntFraction ONE = new MatrixBigIntFraction(new BigIntFraction(BigInteger.ONE,BigInteger.ONE));
+    private static final MatrixBigIntFraction MINUSONE = new MatrixBigIntFraction(new BigIntFraction(new BigInteger("-1"),BigInteger.ONE));
+    private static final MatrixBigIntFraction ZERO = new MatrixBigIntFraction(new BigIntFraction(BigInteger.ONE,BigInteger.ZERO));
+
     private BigIntFraction fraction;
 
     public MatrixBigIntFraction(int v) {
+        //tworzenie ułamka z inta, mianownik to 2^16
         setValue(new BigIntFraction(new BigInteger("" + v), new BigInteger("" + 0x10000))); //0x10000 = 2^16
-        this.inferedClass = BigIntFraction.class;
     }
 
-    public MatrixBigIntFraction(int n, int d) {
-        setValue(new BigIntFraction(new BigInteger("" + n), new BigInteger("" + d)));
-        this.inferedClass = BigIntFraction.class;
-    }
-
-    public MatrixBigIntFraction(BigIntFraction f) {
+    private MatrixBigIntFraction(BigIntFraction f) {
         this.setValue(f);
-        this.inferedClass = BigIntFraction.class;
     }
 
-    public MatrixBigIntFraction(MatrixBigIntFraction prototype) {
-        this.setValue(new BigIntFraction(prototype.getValue()));
-        this.inferedClass = BigIntFraction.class;
+    @Override
+    public MatrixDataType<BigIntFraction> getZero() {
+        return ZERO;
+    }
+
+    @Override
+    public MatrixDataType<BigIntFraction> getMinusOne() {
+        return MINUSONE;
+    }
+
+    @Override
+    public MatrixDataType<BigIntFraction> getOne() {
+        return ONE;
     }
 
     @Override
@@ -64,5 +72,23 @@ public class MatrixBigIntFraction extends MatrixDataType<BigIntFraction> {
     @Override
     public MatrixDataType<BigIntFraction> divide(MatrixDataType<BigIntFraction> number) {
         return new MatrixBigIntFraction(this.getValue().divide(number.getValue()));
+    }
+
+    @Override
+    public MatrixDataType<BigIntFraction> getInverse() {
+        return ONE.divide(this);
+    }
+
+    @Override
+    public int compareTo(MatrixDataType<BigIntFraction> number) {
+        return BigIntFraction.compare(this.getValue(), number.getValue());
+    }
+
+    @Override
+    public MatrixDataType<BigIntFraction> abs() {
+        if (this.compareTo(ZERO) > 0)
+            return this;
+        else
+            return this.multiply(MINUSONE);
     }
 }
