@@ -6,7 +6,7 @@ public class MatrixBigIntFraction extends MatrixDataType<BigIntFraction> {
 
     private static final MatrixBigIntFraction ONE = new MatrixBigIntFraction(new BigIntFraction(BigInteger.ONE,BigInteger.ONE));
     private static final MatrixBigIntFraction MINUSONE = new MatrixBigIntFraction(new BigIntFraction(new BigInteger("-1"),BigInteger.ONE));
-    private static final MatrixBigIntFraction ZERO = new MatrixBigIntFraction(new BigIntFraction(BigInteger.ONE,BigInteger.ZERO));
+    private static final MatrixBigIntFraction ZERO = new MatrixBigIntFraction(new BigIntFraction(BigInteger.ZERO,BigInteger.ONE));
 
     private BigIntFraction fraction;
 

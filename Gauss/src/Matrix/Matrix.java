@@ -39,14 +39,14 @@ public class Matrix {
     }
 
     public void swapRows(int first, int second) {
-
+        if(first==second) return;
         MatrixDataType[] temp = this.matrix[first];
         this.matrix[first] = this.matrix[second];
         this.matrix[second] = temp;
     }
 
     public void swapCols(int first, int second) {
-
+        if(first==second) return;
         MatrixDataType temp;
 
         for (int i = 0; i < this.rowCount; i++) {
@@ -110,6 +110,22 @@ public class Matrix {
         
         return newRow;
 
+    }
+
+    public static double getNormOfDiffrence(Matrix A,Matrix B)
+    {
+        //wyliczenie normy różnicy 2 macierzy
+        //Jako normę traktujemy największy element macierzy (wartością bezwzględną)
+
+        double norm = 0.0;
+
+        for (int i = 0; i < A.rowCount; i++)
+            for (int j = 0; j < A.colCount; j++)
+            {
+                double elem = (((A.matrix[i][j].subtract(B.matrix[i][j])).abs()).divide(B.matrix[i][j].abs())).evaluate();
+                if(elem>norm) norm = elem;
+            }
+        return norm;
     }
 
     public String toString() {
