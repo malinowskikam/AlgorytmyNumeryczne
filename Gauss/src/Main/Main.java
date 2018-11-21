@@ -15,18 +15,17 @@ public class Main {
 
     private static final PrintStream out_BACKUP = System.out;
 
-    public static void main(String[] args) throws Exception {
+    public static void main2(String[] args) throws Exception {
 
         Main.setOutput("result.csv");
 
-        int matrixSize[] = {50};
-        int testCounts[] = {10};
+        int matrixSize[] = {5,10,15,20};
+        int testCounts[] = {100,50,20,10};
 
         performTests(matrixSize,testCounts);
 
         Main.flush();
     }
-
     private static void setOutput(String file) throws Exception
     {
         Main.out = new PrintStream(new BufferedOutputStream(new FileOutputStream(file)));
