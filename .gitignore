@@ -4,6 +4,9 @@
 **/data
 **/*.csv
 
+RownaniaLiniowe2/.vscode/
+RownaniaLiniowe2/obj/
+
 **/.idea/
 *.iml
 
