@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RownaniaLiniowe2
+namespace PopulationProtocols
 {
     class Program
     {
