@@ -8,8 +8,8 @@ namespace PopulationProtocols {
         private static readonly BigIntFraction MINUSONE = new BigIntFraction(BI_MINUSONE, BigInteger.One);
         private static readonly BigIntFraction ZERO = new BigIntFraction(BigInteger.One, BigInteger.Zero);
 
-        BigInteger numerator;
-        BigInteger denominator;
+        public BigInteger numerator;
+        public BigInteger denominator;
 
         public BigIntFraction(BigInteger numerator, BigInteger denominator) {
             this.numerator = numerator;
