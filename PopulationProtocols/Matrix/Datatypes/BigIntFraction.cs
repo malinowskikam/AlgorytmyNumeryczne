@@ -24,16 +24,7 @@ namespace PopulationProtocols {
         }
 
         private static BigInteger Nwd(BigInteger n1, BigInteger n2) {
-            BigInteger a = BigInteger.Abs(n1);
-            BigInteger b = BigInteger.Abs(n1);
-            BigInteger c;
-
-            while ((double)b > 0) {
-                c = a % b;
-                a = b;
-                b = c;
-            }
-            return a;
+            return BigInteger.GreatestCommonDivisor(n1, n2);
         }
 
         private static BigInteger Nww(BigInteger a, BigInteger b) {
@@ -50,7 +41,7 @@ namespace PopulationProtocols {
             }
 
             //przenoszenie minusa do licznika
-            if (denominator.CompareTo(BigInteger.Zero) < 0) {
+            if (denominator < BigInteger.Zero) {
                 numerator = BigInteger.Multiply(numerator, BI_MINUSONE);
                 denominator = BigInteger.Multiply(denominator, BI_MINUSONE);
             }
@@ -61,11 +52,13 @@ namespace PopulationProtocols {
             BigInteger newDenominator;
 
             //gdy różny mianownik
-            if (Equals(denominator, number.denominator)) {
+            if (!Equals(denominator, number.denominator)) {
                 newDenominator = Nww(denominator, number.denominator);
 
                 //wzór na sumę liczników zamienionych na wspólny mianownik
                 BigInteger newNumerator1 = BigInteger.Multiply(numerator, BigInteger.Divide(newDenominator, denominator));
+                BigInteger newNumerator2 = BigInteger.Multiply(number.numerator, BigInteger.Divide(newDenominator,number.denominator));
+                newNumerator = BigInteger.Add(newNumerator1, newNumerator2);
             }
             else {
                 //gdy równy mianownik
