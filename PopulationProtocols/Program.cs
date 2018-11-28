@@ -36,7 +36,11 @@ namespace PopulationProtocols
             MatrixEquasion<Double> eq = new MatrixEquasion<Double>(A, X, A.Multiply(X));
             
 
-            Console.WriteLine(eq.Evaluate(new GaussianFullPivot<Double>()));
+            Console.WriteLine(eq.Evaluate(new GaussianHalfPivot<Double>()));
+            Console.WriteLine();
+            //Console.WriteLine(eq.Evaluate(new Jacobian<Double>(10)));
+            //Console.WriteLine(eq.Evaluate(new GaussSeidel<Double>(10)));
+            Console.WriteLine();
             Console.WriteLine(eq);
 
 
