@@ -27,7 +27,7 @@ namespace PopulationProtocols
        
         public override String ToString()
         {
-            return $"--A:--\n{A.ToString()}--X:--\n{X.ToString()}--B:--\n{B.ToString()}";
+            return $"--A:--\n{A.ToString()}--X:--\n{X?.ToString()}--B:--\n{B.ToString()}";
         }
     
 }
