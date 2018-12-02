@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PopulationProtocols
 {
-    class Matrix<T>
+    public class Matrix<T>
     {
         public readonly int RowCount;
         public readonly int ColCount;

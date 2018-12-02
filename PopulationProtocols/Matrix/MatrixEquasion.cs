@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PopulationProtocols
 {
-    class MatrixEquasion<T>
+    public class MatrixEquasion<T>
     {
         public Matrix<T> A { set; get; }
         public Matrix<T> X { set; get; }

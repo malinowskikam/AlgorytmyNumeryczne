@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PopulationProtocols
 {
-    interface IMatrixEquasionEvaluator<T>
+    public interface IMatrixEquasionEvaluator<T>
     {
         Matrix<T> Perform(MatrixEquasion<T> eq);    
     }
