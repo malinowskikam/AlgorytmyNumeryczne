@@ -14,6 +14,7 @@ namespace PopulationProtocols
             MatrixGenerator g = new MatrixGenerator(size);
             Matrix<Double> m = g.GenerateEquasion().Evaluate(new GaussianHalfPivot<Double>());
             Matrix<Double> m2 = g.GenerateEquasion().Evaluate(new Jacobian(10));
+            Matrix<Double> m3 = g.GenerateEquasion().Evaluate(new GaussSeidel(10));
 
             Console.WriteLine("Eliminacja Gaussa, bez optymalizacji:");
             for (int i = 0; i < g.Keys.Count; i++)
@@ -29,6 +30,10 @@ namespace PopulationProtocols
             Console.WriteLine("Metoda Jacobiego:");
             for (int i = 0; i < g.Keys.Count; i++)
                 Console.WriteLine($"{g.Keys[i]} - {m2.ValueMatrix[i][0].Evaluate() * 100} %");
+
+            Console.WriteLine("Metoda Gaussa-Seidela:");
+            for (int i = 0; i < g.Keys.Count; i++)
+                Console.WriteLine($"{g.Keys[i]} - {m3.ValueMatrix[i][0].Evaluate() * 100} %");
         }
     }
 }
