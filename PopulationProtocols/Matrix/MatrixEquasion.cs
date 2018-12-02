@@ -10,7 +10,7 @@ namespace PopulationProtocols
         public Matrix<T> X { set; get; }
         public Matrix<T> B{ set; get; }
 
-        public MatrixEquasion(MatrixEquasion<T> prototype) : this(new Matrix<T>(prototype.A), new Matrix<T>(prototype.X), new Matrix<T>(prototype.B)) { }
+        public MatrixEquasion(MatrixEquasion<T> prototype) : this(new Matrix<T>(prototype.A), prototype.X!=null?new Matrix<T>(prototype.X):null, new Matrix<T>(prototype.B)) { }
 
         public MatrixEquasion(Matrix<T> A, Matrix<T> X, Matrix<T> B)
         {

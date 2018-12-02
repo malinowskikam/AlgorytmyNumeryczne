@@ -11,7 +11,7 @@ namespace PopulationProtocols
         public Dictionary<String, int> KeyToIndex;
         public Dictionary<int, String> IndexToKey;
 
-        double Nover2; // n nad 2, potrzebne do liczenia prawdopodobieństwa
+        readonly double Nover2; // n nad 2, potrzebne do liczenia prawdopodobieństwa
 
         public int NOfEquasions;
 
