@@ -25,21 +25,21 @@ namespace PopulationProtocols
                 if (other.S == State.STATE_YES)
                     return InteracrionResult.INTER_NOTHING;
 
-                if (other.S == State.STATE_NO)
+                else if (other.S == State.STATE_NO)
                 {
                     this.S = State.STATE_UNDEFINED;
                     other.S = State.STATE_UNDEFINED;
                     return InteracrionResult.INTER_DEC;
                 }
 
-                if (other.S == State.STATE_UNDEFINED)
+                else
                 {
                     other.S = State.STATE_YES;
                     return InteracrionResult.INTER_INC_YES;
                 }
             }
 
-            if (this.S == State.STATE_NO)
+            else if (this.S == State.STATE_NO)
             {
                 if (other.S == State.STATE_YES)
                 {
@@ -48,17 +48,17 @@ namespace PopulationProtocols
                     return InteracrionResult.INTER_DEC;
                 }
                 
-                if (other.S == State.STATE_NO)
+                else if (other.S == State.STATE_NO)
                     return InteracrionResult.INTER_NOTHING;
 
-                if (other.S == State.STATE_UNDEFINED)
+                else
                 {
                     other.S = State.STATE_NO;
                     return InteracrionResult.INTER_INC_NO;
                 }
             }
 
-            if (this.S == State.STATE_UNDEFINED)
+            else
             {
                 if (other.S == State.STATE_YES)
                 {
@@ -66,15 +66,14 @@ namespace PopulationProtocols
                     return InteracrionResult.INTER_INC_YES;
                 }
 
-                if (other.S == State.STATE_NO)
+                else if (other.S == State.STATE_NO)
                 {
                     this.S = State.STATE_NO;
                     return InteracrionResult.INTER_INC_NO;
                 }
-                if (other.S == State.STATE_UNDEFINED)
+                else
                     return InteracrionResult.INTER_NOTHING;
             }
-            return InteracrionResult.INTER_NOTHING;
         }
 
         public override string ToString()

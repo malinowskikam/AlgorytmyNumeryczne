@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace PopulationProtocols
 {
@@ -23,7 +24,44 @@ namespace PopulationProtocols
             this.gen = gen;
         }
 
-        public double GetProbability(int yesc, int noc, int repeats=1000000,int safeswitch=100000)
+        public Result Perform(MatrixEquasion<double> eq)
+        {
+            int NOfEquasions = 0;
+            for (int i = 0; i <= NOfAgents; i++)
+            {
+                for (int j = 0; j <= NOfAgents - i; j++)
+                {
+                    NOfEquasions++;
+                }
+            }
+
+            MatrixDouble[][] raw = new MatrixDouble[NOfEquasions][];
+            for(int i=0;i<NOfEquasions;i++)
+                raw[i] = new MatrixDouble[1];
+
+
+            Stopwatch st = new Stopwatch();
+
+            int iteration = 0;
+            st.Start();
+            for (int i = 0; i <= NOfAgents; i++)
+            {
+                for (int j = 0; j <= NOfAgents - i; j++)
+                {
+                    raw[iteration][0] = new MatrixDouble(GetProbability(i, j));
+                    iteration++;
+                }
+            }
+            st.Stop();
+
+            Matrix<double> probVector = new Matrix<double>(raw);
+            double error = Matrix<double>.GetNormOfDiffrence(eq.A.Multiply(probVector),eq.B);
+            long time = st.ElapsedMilliseconds;
+
+            return new Result("MonteCarlo",error,time,100000,probVector);
+        }
+
+        public double GetProbability(int yesc, int noc, int repeats=100000,int safeswitch=10000)
         {
             int succesCount = 0;
             for (int i = 0; i < repeats; i++)

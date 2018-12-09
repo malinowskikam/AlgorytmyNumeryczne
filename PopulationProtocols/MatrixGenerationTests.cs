@@ -4,13 +4,19 @@ using System.Text;
 
 namespace PopulationProtocols
 {
-    class MatrixGenerationTests
+    class MatrixGenerationTest
     {
-        public static void Start()
+        public static void Run()
         {
-            MatrixGenerator g = new MatrixGenerator(3);
+            MatrixGenerator Gen = new MatrixGenerator(3);
 
-            Console.WriteLine(g.GenerateEquasion());
+            MatrixEquasion<Double> Eq = Gen.GenerateEquasion();
+
+            Console.WriteLine("Matrix generation");
+            Console.WriteLine("A:");
+            Console.WriteLine(Eq.A);
+            Console.WriteLine("B:");
+            Console.WriteLine(Eq.B);
         }
     }
 }

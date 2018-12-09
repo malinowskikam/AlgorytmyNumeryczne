@@ -8,7 +8,7 @@ namespace PopulationProtocols
     {
         public Matrix<T> A { set; get; }
         public Matrix<T> X { set; get; }
-        public Matrix<T> B{ set; get; }
+        public Matrix<T> B { set; get; }
 
         public MatrixEquasion(MatrixEquasion<T> prototype) : this(new Matrix<T>(prototype.A), prototype.X!=null?new Matrix<T>(prototype.X):null, new Matrix<T>(prototype.B)) { }
 
@@ -19,7 +19,7 @@ namespace PopulationProtocols
             this.X = X;
         }
 
-        public Matrix<T> Evaluate(IMatrixEquasionEvaluator<T> eval)
+        public Result Evaluate(IMatrixEquasionEvaluator<T> eval)
         {
             return eval.Perform(new MatrixEquasion<T>(this));
         }

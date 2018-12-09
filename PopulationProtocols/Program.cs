@@ -6,7 +6,9 @@ namespace PopulationProtocols
     {
         static void Main(string[] args)
         {
-            ExampleTests.Start();
+            MatrixGenerationTest.Run();
+            MonteCarloTest.Run();
+            PerformanceTest.Run();
         }
     }
 }

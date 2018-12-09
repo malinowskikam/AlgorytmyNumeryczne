@@ -118,7 +118,7 @@ namespace PopulationProtocols
             for (int i = 0; i < A.RowCount; i++)
                 for (int j = 0; j < A.ColCount; j++)
                 {
-                    double elem = (((A.ValueMatrix[i][j].Subtract(B.ValueMatrix[i][j])).Abs()).Divide(B.ValueMatrix[i][j].Abs())).Evaluate();
+                    double elem = (A.ValueMatrix[i][j].Subtract(B.ValueMatrix[i][j])).Abs().Evaluate();
                     if (elem > norm) norm = elem;
                 }
             return norm;

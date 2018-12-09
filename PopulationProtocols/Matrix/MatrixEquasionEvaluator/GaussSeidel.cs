@@ -1,35 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace PopulationProtocols {
-    public class GaussSeidel : IMatrixEquasionEvaluator<Double> {
-        readonly int NOfIterations;
+    public class GaussSeidel : IMatrixEquasionEvaluator<double> {
+        readonly double precision;
 
-        public GaussSeidel(int i) {
-            NOfIterations = i;
+        public GaussSeidel(double i) {
+            this.precision = i;
         }
 
-        private void GaussSeidelIteration(MatrixEquasion<Double> eq, Matrix<Double> newMatrix, int i) {
-            IMatrixDataType<Double> x = new MatrixDouble(0);
+        private void GaussSeidelIteration(MatrixEquasion<Double> eq, Matrix<Double> newVector, int i) {
+            IMatrixDataType<double> x = new MatrixDouble(0);
             for (int j = 0; j < eq.A.ColCount; j++)
                 if (i != j)
-                    x = (x.Add(eq.A.ValueMatrix[i][j].Multiply(newMatrix.ValueMatrix[j][0])));
+                    x = (x.Add(eq.A.ValueMatrix[i][j].Multiply(newVector.ValueMatrix[j][0])));
             x = x.Multiply(MatrixDouble.MINUSONE);
             x = x.Add(eq.B.ValueMatrix[i][0]);
             x = x.Divide(eq.A.ValueMatrix[i][i]);
 
-            newMatrix.ValueMatrix[i][0] = x;
+            newVector.ValueMatrix[i][0] = x;
         }
 
-        public Matrix<Double> Perform(MatrixEquasion<Double> eq) {
-            Matrix<Double> newMatrix = new Matrix<Double>(eq.B);
+        public Result Perform(MatrixEquasion<double> eq) {
+            MatrixEquasion<double> temp = new MatrixEquasion<double>(eq);
+            Matrix<double> oldVector = new Matrix<double>(eq.B);
 
-            for (int k = 0; k < NOfIterations; k++) 
+            for(int i=0;i<oldVector.RowCount;i++)
+                oldVector.ValueMatrix[i][0] = MatrixDouble.ZERO;
+
+            Matrix<double> newVector = new Matrix<double>(eq.B);
+
+            int iterations = 0;
+
+            Stopwatch st = new Stopwatch();
+            st.Start();
+
+            while (Matrix<double>.GetNormOfDiffrence(oldVector, newVector) > this.precision)
+            {
+                oldVector = new Matrix<double>(newVector);
+
+                iterations++;
+
                 for (int i = 0; i < eq.A.RowCount; i++)
-                    GaussSeidelIteration(eq, newMatrix, i);
+                    GaussSeidelIteration(eq, newVector, i);
+            }
 
-            return newMatrix;
+            st.Stop();
+
+            double error = Matrix<double>.GetNormOfDiffrence(eq.A.Multiply(newVector), eq.B);
+
+            return new Result($"Gauss-Seidel (p:{this.precision})",error,st.ElapsedMilliseconds,iterations,newVector);
         }
     }
 }

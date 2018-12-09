@@ -6,6 +6,6 @@ namespace PopulationProtocols
 {
     public interface IMatrixEquasionEvaluator<T>
     {
-        Matrix<T> Perform(MatrixEquasion<T> eq);    
+        Result Perform(MatrixEquasion<T> eq);    
     }
 }

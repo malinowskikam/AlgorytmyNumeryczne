@@ -26,17 +26,17 @@ namespace PopulationProtocols
             Nover2 = (double)BinomCoefficient((long)n, 2L);
         }
 
-        public MatrixEquasion<Double> GenerateEquasion()
+        public MatrixEquasion<double> GenerateEquasion()
         {
-            IMatrixDataType<Double>[][] rawA,rawB;
+            IMatrixDataType<double>[][] rawA,rawB;
 
-            rawA = new IMatrixDataType<Double>[NOfEquasions][];
-            rawB = new IMatrixDataType<Double>[NOfEquasions][];
+            rawA = new IMatrixDataType<double>[NOfEquasions][];
+            rawB = new IMatrixDataType<double>[NOfEquasions][];
 
             for(int i=0; i<NOfEquasions;i++)
             {
-                rawA[i] = new IMatrixDataType<Double>[NOfEquasions];
-                rawB[i] = new IMatrixDataType<Double>[1];
+                rawA[i] = new IMatrixDataType<double>[NOfEquasions];
+                rawB[i] = new IMatrixDataType<double>[1];
             }
 
             // wektor B ma same 0 i 1 na ostatnim miejscu
@@ -51,7 +51,7 @@ namespace PopulationProtocols
                 for (int j = 0; j < NOfEquasions; j++)
                     rawA[i][j] = GenerateValue(i, j);
 
-            return new MatrixEquasion<Double>(new Matrix<Double>(rawA), null, new Matrix<Double>(rawB));
+            return new MatrixEquasion<double>(new Matrix<double>(rawA), null, new Matrix<double>(rawB));
         }
 
         private MatrixDouble GenerateValue(int i,int j)
