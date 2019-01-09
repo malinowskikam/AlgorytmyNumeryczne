@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using Approximation.Matrix.MatrixEquasionEvaluator.EvaluationResult;
+using Approximation.Matrix.Datatypes;
 
-namespace PopulationProtocols
+namespace Approximation.Matrix.MatrixEquasionEvaluator
 {
     class GaussianHalfPivot : IMatrixEquasionEvaluator<double>
     {
-        public Result Perform(MatrixEquasion<double> eq)
+        public EvaluationResult.EvaluationResult Perform(MatrixEquasion<double> eq)
             // Eliminacja Gaussa z częściowym wyborem elementu
             // Brak optymalizacji
         {
-            Stopwatch st = new Stopwatch();
             MatrixEquasion<double> temp = new MatrixEquasion<double>(eq);
 
-            st.Start();
             FirstPhaseHalfPivot(temp);
             SecondPhase(temp);
-            st.Stop();
 
-            double error = Matrix<double>.GetNormOfDiffrence(eq.A.Multiply(temp.B), eq.B);
+            eq.X = temp.B;
 
-            return new Result("GaussianHalfPivot",error,st.ElapsedMilliseconds,1,temp.B);
+            return new EvaluationResult.EvaluationResult();
         }
 
         private void FirstPhaseHalfPivot(MatrixEquasion<double> eq)

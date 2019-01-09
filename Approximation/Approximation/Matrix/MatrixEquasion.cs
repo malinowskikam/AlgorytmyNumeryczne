@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Approximation.Matrix.Datatypes;
+using Approximation.Matrix.MatrixEquasionEvaluator;
+using Approximation.Matrix.MatrixEquasionEvaluator.EvaluationResult;
 
-namespace PopulationProtocols
+namespace Approximation.Matrix
 {
     public class MatrixEquasion<T>
     {
@@ -19,15 +22,23 @@ namespace PopulationProtocols
             this.X = X;
         }
 
-        public Result Evaluate(IMatrixEquasionEvaluator<T> eval)
+        public EvaluationResult Evaluate(IMatrixEquasionEvaluator<T> eval)
         {
-            return eval.Perform(new MatrixEquasion<T>(this));
+            return eval.Perform(this);
         }
 
        
         public override String ToString()
         {
-            return $"--A:--\n{A.ToString()}--X:--\n{X?.ToString()}--B:--\n{B.ToString()}";
+            string s="";
+            if (A != null)
+                s += $"--A:--\n{A.ToString()}";
+            if (X != null)
+                s += $"--X:--\n{X.ToString()}";
+            if (B != null)
+                s += $"--B:--\n{B.ToString()}";
+
+            return s;
         }
     
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Approximation.Matrix;
+using Approximation.Matrix.Datatypes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

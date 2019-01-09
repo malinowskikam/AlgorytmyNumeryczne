@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Approximation.Matrix.Datatypes;
 
-namespace PopulationProtocols
+namespace Approximation.Matrix
 {
     public class Matrix<T>
     {

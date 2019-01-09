@@ -4,8 +4,10 @@
 **/data
 **/*.csv
 
-RownaniaLiniowe2/.vscode/
-RownaniaLiniowe2/obj/
+**/.vscode/
+**/obj/
+**/*.sln
+**/*.csproj
 
 **/.idea/
 *.iml
@@ -459,3 +461,4 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
