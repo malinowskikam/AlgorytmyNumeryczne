@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 using Approximation.Matrix.Datatypes;
-using Approximation.Matrix.MatrixEquasionEvaluator.EvaluationResult;
 
 namespace Approximation.Matrix.MatrixEquasionEvaluator
 {
@@ -14,7 +13,7 @@ namespace Approximation.Matrix.MatrixEquasionEvaluator
             this.precision = i;
         }
 
-        private void GaussSeidelIteration(MatrixEquasion<Double> eq, Matrix<Double> newVector, int i) {
+        private void GaussSeidelIteration(MatrixEquation<Double> eq, Matrix<Double> newVector, int i) {
             IMatrixDataType<double> x = new MatrixDouble(0);
             for (int j = 0; j < eq.A.ColCount; j++)
                 if (i != j)
@@ -26,8 +25,7 @@ namespace Approximation.Matrix.MatrixEquasionEvaluator
             newVector.ValueMatrix[i][0] = x;
         }
 
-        public EvaluationResult.EvaluationResult Perform(MatrixEquasion<double> eq) {
-            MatrixEquasion<double> temp = new MatrixEquasion<double>(eq);
+        public void Perform(MatrixEquation<double> eq) {
             Matrix<double> oldVector = new Matrix<double>(eq.B);
 
             for(int i=0;i<oldVector.RowCount;i++)
@@ -36,9 +34,6 @@ namespace Approximation.Matrix.MatrixEquasionEvaluator
             Matrix<double> newVector = new Matrix<double>(eq.B);
 
             int iterations = 0;
-
-            Stopwatch st = new Stopwatch();
-            st.Start();
 
             while (Matrix<double>.GetNormOfDiffrence(oldVector, newVector) > this.precision)
             {
@@ -50,11 +45,9 @@ namespace Approximation.Matrix.MatrixEquasionEvaluator
                     GaussSeidelIteration(eq, newVector, i);
             }
 
-            st.Stop();
+            eq.X = newVector;
 
-            double error = Matrix<double>.GetNormOfDiffrence(eq.A.Multiply(newVector), eq.B);
-
-            return new EvaluationResult.EvaluationResult();
+            return;
         }
     }
 }

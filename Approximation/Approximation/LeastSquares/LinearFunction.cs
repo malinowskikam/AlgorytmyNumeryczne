@@ -17,7 +17,7 @@ namespace Approximation.LeastSquares
             Matrix<double> A = GetAMatrix(arguments);
             Matrix<double> B = GetBMatrix(arguments, values);
 
-            MatrixEquasion<double> Eq = new MatrixEquasion<double>(A, null, B);
+            MatrixEquation<double> Eq = new MatrixEquation<double>(A, null, B);
 
             Eq.Evaluate(new Matrix.MatrixEquasionEvaluator.GaussianHalfPivot());
 

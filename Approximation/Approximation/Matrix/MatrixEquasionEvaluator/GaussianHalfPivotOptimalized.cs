@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
-using Approximation.Matrix.MatrixEquasionEvaluator.EvaluationResult;
 using Approximation.Matrix.Datatypes;
 
 namespace Approximation.Matrix.MatrixEquasionEvaluator
 {
     class GaussianHalfPivotOptimalized : IMatrixEquasionEvaluator<double>
     {
-        public EvaluationResult.EvaluationResult Perform(MatrixEquasion<double> eq)
+        public void Perform(MatrixEquation<double> eq)
         {
-            MatrixEquasion<double> temp = new MatrixEquasion<double>(eq);
 
-            FirstPhaseHalfPivot(temp);
-            SecondPhase(temp);
+            FirstPhaseHalfPivot(eq);
+            SecondPhase(eq);
 
-            double error = Matrix<double>.GetNormOfDiffrence(eq.A.Multiply(temp.B), eq.B);
-
-            return new EvaluationResult.EvaluationResult();
+            eq.X = eq.B;
+            
+            return;
         }
 
-        private void FirstPhaseHalfPivot(MatrixEquasion<double> eq)
+        private void FirstPhaseHalfPivot(MatrixEquation<double> eq)
         {
             //Pierwsza faza eliminacji Gaussa, z częściowym wyborem elementu podstawowego
             //Tworzy z macierzy A macierz trójkątną górną oraz dzieli wiersze tak, aby uzyskać jedynki wiodące
@@ -60,7 +58,7 @@ namespace Approximation.Matrix.MatrixEquasionEvaluator
             return max;
         }
 
-        private void SecondPhase(MatrixEquasion<double> eq)
+        private void SecondPhase(MatrixEquation<double> eq)
         {
             //Druga faza eliminacji Gaussa
             //Sprowadza macierz A do macierzy jednostkowej

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PopulationProtocols
+namespace Approximation.Matrix.MatrixGeneration
 {
     class MatrixGenerator
     {
@@ -28,7 +28,7 @@ namespace PopulationProtocols
             Nover2 = (double)BinomCoefficient((long)n, 2L);
         }
 
-        public MatrixEquasion<double> GenerateEquasion()
+        public MatrixEquation<double> GenerateEquation()
         {
             IMatrixDataType<double>[][] rawA,rawB;
 
@@ -53,7 +53,7 @@ namespace PopulationProtocols
                 for (int j = 0; j < NOfEquasions; j++)
                     rawA[i][j] = GenerateValue(i, j);
 
-            return new MatrixEquasion<double>(new Matrix<double>(rawA), null, new Matrix<double>(rawB));
+            return new MatrixEquation<double>(new Matrix<double>(rawA), null, new Matrix<double>(rawB));
         }
 
         private MatrixDouble GenerateValue(int i,int j)
