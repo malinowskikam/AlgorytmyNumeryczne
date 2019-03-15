@@ -1,4 +1,4 @@
-package PowerSeriesTest;
+package PowerSeriesDataGathering;
 
 import PowerSeries.*;
 
